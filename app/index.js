@@ -1,11 +1,12 @@
 /**
  * Created by huixie on 2017/6/17.
  */
-import React from 'react'
+import React,{ Component } from 'react'
 import ReactDOM from 'react-dom'
 import {Input,Button} from 'antd'
-// import 'style/index.css'
-class App extends React.Component {
+import 'style/index.css'
+
+class App extends Component{
   constructor(props){
     super(props)
   }

@@ -23,7 +23,7 @@ module.exports={
           include:App_Path
         },{
           test:/\.css$/,
-          loaders:['style-loader','css-loader','autoprefixer-loader']
+          loaders:['style-loader','css-loader','autoprefixer-loader'],
         },{
           test:/\.less$/,
           loaders:['style-loader','css-loader','autoprefixer-loader','less-loader']
@@ -36,7 +36,11 @@ module.exports={
         }]
     },
     resolve:{
-        extensions:['.js','.json',"jsx"]
+      alias: {
+        style: path.resolve(App_Path,'style'),
+        component:  path.resolve(App_Path,'component')
+      },
+      extensions:['.js','.json',"jsx"]
     },
     devtool:'eval-source-map',
     devServer: {
@@ -48,10 +52,6 @@ module.exports={
         inline: true//实时刷新
     },
     plugins:[
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name: 'vendor',
-        //     filename: 'bundle.min.js',
-        // }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false,
