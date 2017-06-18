@@ -9,12 +9,20 @@ var Build_Path=path.resolve(Root_Path,'build')
 
 module.exports={
     entry:{
-        app:path.resolve(App_Path,'index')
+      app:path.resolve(App_Path,'index'),
+      lib: [//公共组件
+        'react',
+        'react-dom',
+        'antd',
+        'moment',
+        // 'lodash',
+      ],
     },
     output:{
         path:Build_Path,
         publicPath: '/',
-        filename:"./bundle.js"
+        filename:"./[name]-[hash].js",
+        library: '[name]',
     },
     module:{
         loaders:[{
@@ -23,7 +31,10 @@ module.exports={
           include:App_Path
         },{
           test:/\.css$/,
-          loaders:['style-loader','css-loader','autoprefixer-loader'],
+          loaders:ExtractTextPlugin.extract({
+            fallback: 'style',
+            use:['css-loader','autoprefixer-loader']
+          }),
         },{
           test:/\.less$/,
           loaders:['style-loader','css-loader','autoprefixer-loader','less-loader']
@@ -40,7 +51,8 @@ module.exports={
         style: path.resolve(App_Path,'style'),
         component:  path.resolve(App_Path,'component')
       },
-      extensions:['.js','.json',"jsx"]
+      extensions:['.js','.json',"jsx"],
+      modules: [App_Path, "node_modules"]
     },
     devtool:'eval-source-map',
     devServer: {
@@ -52,12 +64,31 @@ module.exports={
         inline: true//实时刷新
     },
     plugins:[
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                drop_console: false,
-            }
-        }),
-        new webpack.HotModuleReplacementPlugin(),
+      // new webpack.optimize.CommonsChunkPlugin({
+      //   name: 'vendor',
+      //   filename: 'vendor.js',
+      //   minChunks: Infinity
+      // }),
+      // new webpack.optimize.UglifyJsPlugin({
+      //     compress: {
+      //         warnings: false,
+      //         drop_console: false,
+      //     }
+      // }),
+      new webpack.HotModuleReplacementPlugin(),
+      new ExtractTextPlugin({
+        filename: "[name].bundle.css",
+        allChunks: true,
+      }),
+      new HtmlWebpackPlugin({
+        filename: './index.html',
+        template:App_Path+'/index.html',
+        inject: true,
+        hash: true,
+        minify: {
+          removeComments:true,
+          collapseWhitespace:true
+        }
+      }),
     ]
 }

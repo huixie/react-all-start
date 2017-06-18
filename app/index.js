@@ -4,7 +4,7 @@
 import React,{ Component } from 'react'
 import ReactDOM from 'react-dom'
 import {Input,Button} from 'antd'
-import 'style/index.css'
+import 'style/base.less'
 
 class App extends Component{
   constructor(props){
