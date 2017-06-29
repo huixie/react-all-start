@@ -1,0 +1,5 @@
+webpack.config.js 
+app/dist/**
+app/style/**
+.idea/**
+.vscode/**
