@@ -63,10 +63,8 @@ module.exports = {
     alias: {
       style: path.resolve(App_Path, 'style'),
       component: path.resolve(App_Path, 'component'),
-      actions: path.resolve(App_Path, 'actions'),
-      redux: path.resolve(App_Path, 'redux'),
+      reduxdir: __dirname + '/app/reduxdir',
       container: path.resolve(App_Path, 'container'),
-      reducers: path.resolve(App_Path, 'reducers'),
       utils: path.resolve(App_Path, 'utils')
     },
     extensions: ['.js', '.json', 'jsx'],

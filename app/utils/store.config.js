@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import { logger, router, reduxRouterMiddlemare } from 'redux/middleware'
-import rootReducer from 'redux/reducers'
+import { logger, router, reduxRouterMiddlemare } from 'reduxdir/middleware'
+import rootReducer from 'reduxdir/reducers'
 
-const nextReducer = require('redux/reducers')
+const nextReducer = require('reduxdir/reducers')
 
 export default function configure (initialState) {
   const create = window.devToolsExtension
@@ -17,7 +17,7 @@ export default function configure (initialState) {
   )(create)
   const store = createStoreWithMiddleware(rootReducer, initialState)
   if (module.hot) {
-    module.hot.accept('redux/reducers', () => {
+    module.hot.accept('reduxdir/reducers', () => {
       store.replaceReducer(nextReducer)
     })
   }
