@@ -2,15 +2,14 @@
  * @Author: huixie
  * @Date: 2017-07-04 16:21:45
  * @Last Modified by: huixie
- * @Last Modified time: 2017-07-04 20:32:58
+ * @Last Modified time: 2017-07-05 15:39:29
  */
 
 import { message } from 'antd'
 import { hashHistory } from 'react-router'
 import fetch from 'isomorphic-fetch'
-console.log(global.$GLOBALCONFIG)
-export const API_PREFIX = global.$GLOBALCONFIG.$ctx
-console.log()
+
+export const API_PREFIX = window.$GLOBALCONFIG.$ctx
 export const API_SUFFIX = '.json'
 
 // 发起AjaxAction
@@ -24,26 +23,28 @@ export const createAjaxAction = (api, startAction, endAction) => (
   data = isArray(data) ? data : [data]
   api(...data)
     .then(checkStatus)
-    .then(res => res.json())
+    .then(response => {
+      return response.json()
+    })
     .then(resp => {
       respon = resp
       endAction && dispatch(endAction({ req: data, res: resp }))
     })
     .then(() => {
       switch (respon.status) {
-        case 1:
-          cb && cb(respon)
-          break
-        case 0:
-          if (typeof reject === 'function') {
-            reject(respon)
-          } else {
-            message.error(respon.msg)
-          }
-          break
-        default:
-          message.error('返回有误')
-          break
+      case 1:
+        cb && cb(respon)
+        break
+      case 0:
+        if (typeof reject === 'function') {
+          reject(respon)
+        } else {
+          message.error(respon.msg)
+        }
+        break
+      default:
+        message.error('返回有误')
+        break
       }
     })
     .catch(catchError)
@@ -81,13 +82,13 @@ const catchError = error => {
 
 export const fetchJSON = (url, params) => {
   const data = {
-    method: 'POST',
-    credentials: 'include',
+    'method': 'POST',
+    'credentials': 'include',
     headers: {
-      'Content-Type': 'application/json',
-      token: params.token
+      'Content-Type': 'application/json'
+      // token: params.token
     },
-    body: JSON.stringify(params)
+    'body': JSON.stringify(params)
   }
   url = `${API_PREFIX}${url}${API_SUFFIX}`
   return fetch(url, data)

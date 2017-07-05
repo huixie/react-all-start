@@ -5,10 +5,47 @@
 		"node": true,
 		"es6": true
 	},
-	"plugins": ["react"],
+	"plugins": ["react", "babel"],
 	"extends": ["standard", "standard-react"],
-	"rules":{
-		"comma-dangle":["error","never"], //数组对象最后一项后面可以不加，
-		"max-len": [1, 150, 2, {ignoreComments: true}]
+	"rules": {
+		"comma-dangle": ["error", "never"], //数组对象最后一项后面可以不加，
+		"max-len": ["error", 150, 2, {
+			"ignoreComments": true
+		}],
+		"func-names": 0,
+		"indent": ["error", 2],
+		"react/jsx-indent": [2, 2],
+		"semi": 0,
+		"no-debugger": "off",
+		"react/sort-comp": 0,
+		"react/prop-types": 0,
+		"react/prefer-stateless-function": 0,
+		"react/prefer-es6-class": 0,
+		"react/jsx-first-prop-new-line": 0,
+		"react/jsx-filename-extension": 0,
+		"no-return-assign": 0,
+		"react/no-multi-comp": 0,
+		"array-callback-return": 0,
+		"no-underscore-dangle": 0,
+		"no-bitwise": ["error", {
+			"allow": ["~"]
+		}],
+		"eqeqeq": "off",
+		"import/prefer-default-export": "off",
+		"no-plusplus": 1,
+		"no-unused-expressions": ["warn", {
+			"allowShortCircuit": true,
+			"allowTernary": true
+		}],
+		"import/no-unresolves": 0,
+		"import/no-extraneous-dependencies": 0,
+		"object-shorthand": 0,
+		"no-unused-vars": ["error", {
+			"vars": "all",
+			"args": "none"
+		}],
+		"no-param-reassign": ["off", {
+			"props": false
+		}]
 	}
 }

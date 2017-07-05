@@ -2,7 +2,7 @@
  * @Author: huixie
  * @Date: 2017-06-29 20:52:39
  * @Last Modified by: huixie
- * @Last Modified time: 2017-07-04 18:32:03
+ * @Last Modified time: 2017-07-05 15:07:40
  */
 
 import React, { Component } from 'react'
@@ -20,7 +20,7 @@ class user extends Component {
   }
 
   componentDidMount () {
-    fetchUserList({})
+    this.props.dispatch(fetchUserList({id: 1}))
   }
 
   render () {

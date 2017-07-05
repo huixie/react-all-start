@@ -3,7 +3,9 @@ import { hasResponseError } from 'utils/public'
 
 export const userListResult = handleActions(
   {
-    'request usrt list': (state, action) => ({ ...state, loading: true }),
+    'request usrt list': (state, action) => {
+      return { ...state, loading: true }
+    },
     'receive user list': (state, action) => {
       const { res } = action.payload
       if (hasResponseError(res)) {

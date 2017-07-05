@@ -9,7 +9,7 @@ var Build_Path = path.resolve(Root_Path, 'build')
 
 module.exports = {
   entry: {
-    app: path.resolve(App_Path, 'index'),
+    app: path.resolve(App_Path, 'index.js'),
     lib: [
       // 公共组件
       'react',
